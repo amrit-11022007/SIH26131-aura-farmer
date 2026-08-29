@@ -1,0 +1,14 @@
+{
+  "name": "crop-health",
+  "version": "1.0.0",
+  "description": "Crop Health Desktop Application",
+  "main": "electron/main.js",
+  "scripts": {
+    "build": "pnpm --dir farmer-frontend build",
+    "dev": "electron .",
+    "electron": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^44.0.0"
+  }
+}
