@@ -1,6 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
-import { alertData } from "../../data/alerts";
+import { ObjectId } from "mongodb";
+import clientPromise from "@/lib/mongodb";
+import type { CardData } from "@/app/types/components";
 import PercentageCircle from "@/app/components/PercentageCircle";
+
+function normalizeAlert(doc: Record<string, any>): CardData {
+  const recommendation = Array.isArray(doc.recommendation)
+    ? doc.recommendation.map((item) => String(item))
+    : typeof doc.recommendation === "string"
+      ? [doc.recommendation]
+      : [];
+
+  const triggerConditions = Array.isArray(doc.triggerConditions)
+    ? doc.triggerConditions.map((item) => ({
+        label: String(item?.label ?? "Condition"),
+        value: String(item?.value ?? "N/A"),
+      }))
+    : [];
+
+  return {
+    id: String(doc._id ? doc._id.toString() : (doc.id ?? "alert")),
+    type: String(doc.type ?? "General"),
+    name: String(doc.name ?? "Alert"),
+    timing: String(doc.timing ?? "N/A"),
+    severity: String(doc.severity ?? "Medium"),
+    percentage: Number(doc.percentage ?? 0),
+    location: String(doc.location ?? "Unknown location"),
+    description: String(doc.description ?? "No description available."),
+    triggerConditions,
+    recommendation,
+  };
+}
 
 export default async function AlertDetailPage({
   params,
@@ -8,11 +39,27 @@ export default async function AlertDetailPage({
   params: Promise<{ alertid: string }>;
 }) {
   const { alertid } = await params;
-  const alert = alertData.find((item) => item.id === alertid);
 
-  if (!alert) {
+  const client = await clientPromise;
+  const db = client.db(process.env.MONGODB_DB ?? "sih131");
+
+  let alertDoc: Record<string, any> | null = null;
+
+  if (ObjectId.isValid(alertid)) {
+    alertDoc = await db
+      .collection("farmerData")
+      .findOne({ _id: new ObjectId(alertid) });
+  }
+
+  if (!alertDoc) {
+    alertDoc = await db.collection("farmerData").findOne({ id: alertid });
+  }
+
+  if (!alertDoc) {
     notFound();
   }
+
+  const alert = normalizeAlert(alertDoc);
 
   return (
     <main className="min-h-screen bg-(--alert-page-bg) px-4 py-8 sm:px-6 lg:px-8">
@@ -25,7 +72,7 @@ export default async function AlertDetailPage({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 place-items-center">
-          <div className="w-full max-w-md min-h-[180px] rounded-2xl border border-red-200 bg-red-50 p-5 text-red-800 shadow-sm">
+          <div className="w-full max-w-md min-h-45 rounded-2xl border border-red-200 bg-red-50 p-5 text-red-800 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">
               Severity Level
             </p>
@@ -35,7 +82,7 @@ export default async function AlertDetailPage({
             <PercentageCircle value={alert.percentage} />
           </div>
 
-          <div className="w-full max-w-md min-h-[180px] rounded-2xl border border-orange-200 bg-orange-50 p-5 text-orange-800 shadow-sm">
+          <div className="w-full max-w-md min-h-45 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-orange-800 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">
               Affected Areas
             </p>
@@ -44,7 +91,7 @@ export default async function AlertDetailPage({
             </p>
           </div>
 
-          <div className="w-full max-w-md min-h-[180px] rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-800 shadow-sm">
+          <div className="w-full max-w-md min-h-45 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-800 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">
               Triggered Condition
             </p>
@@ -63,7 +110,7 @@ export default async function AlertDetailPage({
             </div>
           </div>
 
-          <div className="w-full max-w-md min-h-[180px] rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-800 shadow-sm">
+          <div className="w-full max-w-md min-h-45 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-800 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">
               Recommended Actions
             </p>
