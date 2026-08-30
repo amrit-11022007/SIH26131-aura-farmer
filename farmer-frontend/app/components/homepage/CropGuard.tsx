@@ -56,12 +56,12 @@ export default function CropGuard() {
   const heroOffset = CIRC * (1 - heroVal / 100);
 
   return (
-    <div className="bg-paper font-body text-soil leading-relaxed antialiased">
+    <div className="bg-[#F4F0E4] text-[#2E241D] antialiased leading-6 font-sans">
       {/* ---------- NAV ---------- */}
-      <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-3 px-5 py-3.5">
-          <div className="flex items-center gap-2.5 font-display text-xl font-bold">
-            <svg className="h-8 w-8 flex-none" viewBox="0 0 32 32">
+      <header className="sticky top-0 z-40 border-b border-[#DCD5C3] bg-[#F4F0E4]/90 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-295 items-center justify-between gap-3 px-5 py-3.5 lg:px-5">
+          <div className="flex items-center gap-2.5 font-serif text-[19px] font-bold text-[#2E241D]">
+            <svg className="h-7.5 w-7.5 shrink-0" viewBox="0 0 32 32">
               <path
                 d="M16 3C9 3 4 9 4 16c0 6 4 11 9 12.5C13.5 22 15 15 22 9c-5 3-8 7-9.5 12C21 19 27 12 27 5c-4 0-8 1-11-2z"
                 fill="#3F7D4C"
@@ -69,39 +69,39 @@ export default function CropGuard() {
             </svg>
             CropGuard
           </div>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-soil-70 md:flex">
+          <nav className="hidden items-center gap-7 text-sm font-medium text-[#5A4A3E] lg:flex">
             <a
+              className="border-b-2 border-transparent pb-1.5 transition hover:border-[#E0900F] hover:text-[#2E241D]"
               href="#pillars"
-              className="border-b-2 border-transparent px-0 py-1.5 hover:border-marigold hover:text-soil"
             >
               {t("nav1")}
             </a>
             <a
+              className="border-b-2 border-transparent pb-1.5 transition hover:border-[#E0900F] hover:text-[#2E241D]"
               href="#demo"
-              className="border-b-2 border-transparent px-0 py-1.5 hover:border-marigold hover:text-soil"
             >
               {t("nav2")}
             </a>
             <a
+              className="border-b-2 border-transparent pb-1.5 transition hover:border-[#E0900F] hover:text-[#2E241D]"
               href="#dashboard"
-              className="border-b-2 border-transparent px-0 py-1.5 hover:border-marigold hover:text-soil"
             >
               {t("nav3")}
             </a>
             <a
+              className="border-b-2 border-transparent pb-1.5 transition hover:border-[#E0900F] hover:text-[#2E241D]"
               href="#alerts"
-              className="border-b-2 border-transparent px-0 py-1.5 hover:border-marigold hover:text-soil"
             >
               {t("nav4")}
             </a>
           </nav>
           <div className="flex items-center gap-2.5">
-            <div className="flex rounded-full border border-line bg-paper-raised p-0.5">
+            <div className="flex rounded-full border border-[#DCD5C3] bg-[#FFFDF7] p-1">
               {(["en", "hi", "mr"] as Lang[]).map((l) => (
                 <button
                   key={l}
-                  className={`rounded-full px-2.5 py-1.5 text-xs font-semibold ${
-                    lang === l ? "bg-leaf text-white" : "text-soil-70"
+                  className={`rounded-full px-2.5 py-1.5 text-[12px] font-semibold transition ${
+                    lang === l ? "bg-[#3F7D4C] text-white" : "text-[#5A4A3E]"
                   }`}
                   onClick={() => setLang(l)}
                 >
@@ -110,8 +110,8 @@ export default function CropGuard() {
               ))}
             </div>
             <a
+              className="hidden whitespace-nowrap text-sm font-semibold text-[#4C7A94] lg:inline"
               href="#dashboard"
-              className="hidden whitespace-nowrap text-sm font-semibold text-sky md:inline"
             >
               {t("navOfficer")}
             </a>
@@ -120,63 +120,63 @@ export default function CropGuard() {
       </header>
 
       {/* ---------- HERO ---------- */}
-      <section className="py-14">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+      <section className="py-14 md:py-16">
+        <div className="mx-auto grid max-w-295 items-center gap-10 px-5 md:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("heroEyebrow")}
             </p>
             <h1
-              className="mt-0 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl"
+              className="font-serif text-[clamp(32px,5.4vw,54px)] leading-[1.06] tracking-[-0.01em] text-[#2E241D]"
               dangerouslySetInnerHTML={html("heroTitle")}
             />
-            <p className="mt-5 max-w-[46ch] text-base text-soil-70 sm:text-lg">
+            <p className="mt-4 max-w-[46ch] text-[17px] text-[#5A4A3E]">
               {t("heroLede")}
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#demo"
-                className="inline-flex items-center gap-2 rounded-full bg-leaf px-5 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-leaf-dark"
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 rounded-full bg-[#3F7D4C] px-5 py-3.5 text-[15px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2C5A38]"
               >
                 {t("heroCta1")}
-              </a>
+              </Link>
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-2 rounded-full border border-soil px-5 py-3 font-semibold text-soil transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full border border-[#2E241D] bg-transparent px-5 py-3.5 text-[15px] font-semibold text-[#2E241D] transition hover:-translate-y-0.5"
               >
                 {t("heroCta2")}
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-6">
-              <div className="text-sm text-soil-70">
-                <strong className="block font-display text-xl font-semibold text-soil">
+              <div className="text-[13px] text-[#5A4A3E]">
+                <strong className="block font-serif text-[22px] text-[#2E241D]">
                   3
                 </strong>
-                {t("stat1")}
+                <span>{t("stat1")}</span>
               </div>
-              <div className="text-sm text-soil-70">
-                <strong className="block font-display text-xl font-semibold text-soil">
+              <div className="text-[13px] text-[#5A4A3E]">
+                <strong className="block font-serif text-[22px] text-[#2E241D]">
                   Offline
                 </strong>
-                {t("stat2")}
+                <span>{t("stat2")}</span>
               </div>
-              <div className="text-sm text-soil-70">
-                <strong className="block font-display text-xl font-semibold text-soil">
+              <div className="text-[13px] text-[#5A4A3E]">
+                <strong className="block font-serif text-[22px] text-[#2E241D]">
                   IPM-first
                 </strong>
-                {t("stat3")}
+                <span>{t("stat3")}</span>
               </div>
             </div>
           </div>
 
-          <div className="mx-auto w-[min(300px,84vw)] rounded-[34px] bg-soil p-3.5 shadow-2xl">
-            <div className="min-h-[420px] rounded-[22px] bg-paper-raised px-4 py-5">
-              <div className="mb-3.5 flex justify-between text-[11px] font-semibold text-soil-70">
+          <div className="mx-auto w-[min(300px,84vw)] rounded-[34px] bg-[#2E241D] p-3.5 shadow-[0_24px_50px_-20px_rgba(46,36,29,0.45)]">
+            <div className="min-h-105 rounded-[22px] bg-[#FFFDF7] p-4 pb-5">
+              <div className="mb-3 flex items-center justify-between text-[11px] font-semibold text-[#5A4A3E]">
                 <span>{t("phoneTop1")}</span>
                 <span>{t("phoneTop2")}</span>
               </div>
-              <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-leaf bg-leaf-pale">
-                <div className="absolute left-0 right-0 top-0 h-0.5 animate-scan bg-gradient-to-r from-transparent via-marigold to-transparent" />
+              <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-[#3F7D4C] bg-[#E7F0E1]">
+                <div className="absolute inset-x-0 top-0 h-0.75 bg-linear-to-r from-transparent via-[#E0900F] to-transparent animate-[scanmove_2.4s_ease-in-out_infinite]" />
                 <svg viewBox="0 0 100 100" className="w-[58%]">
                   <path
                     d="M50 8C25 8 10 30 10 52c0 20 14 36 30 40C33 66 40 42 62 22c-15 10-24 24-28 40C58 58 82 38 82 15c-13 0-26 3-32-7z"
@@ -186,40 +186,40 @@ export default function CropGuard() {
                 </svg>
               </div>
               <div className="mt-4 flex items-center gap-3">
-                <div className="relative h-16 w-16 flex-none">
-                  <svg width="64" height="64" className="-rotate-90">
+                <div className="relative h-16 w-16 shrink-0">
+                  <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64">
                     <circle
-                      className="fill-none stroke-line stroke-7"
                       cx="32"
                       cy="32"
                       r="26"
+                      fill="none"
+                      stroke="#DCD5C3"
+                      strokeWidth="7"
                     />
                     <circle
-                      className="fill-none transition-all duration-800 ease-out"
                       cx="32"
                       cy="32"
                       r="26"
-                      strokeWidth="7"
+                      fill="none"
                       strokeLinecap="round"
-                      style={{
-                        strokeDasharray: CIRC,
-                        strokeDashoffset: heroOffset,
-                        stroke: ringColor(heroVal),
-                      }}
+                      strokeWidth="7"
+                      strokeDasharray={CIRC}
+                      strokeDashoffset={heroOffset}
+                      stroke={ringColor(heroVal)}
                     />
                   </svg>
-                  <div className="absolute inset-0 flex items-center justify-center text-sm font-bold text-soil">
+                  <div className="absolute inset-0 flex items-center justify-center text-[13px] font-bold text-[#2E241D]">
                     {heroVal}%
                   </div>
                 </div>
-                <div className="text-xs text-soil-70">
-                  <strong className="block text-sm font-bold text-soil">
+                <div className="text-[12px] text-[#5A4A3E]">
+                  <strong className="block text-[14px] font-bold text-[#2E241D]">
                     {t("phoneRingLabel")}
                   </strong>
-                  {t("phoneRingSub")}
+                  <span>{t("phoneRingSub")}</span>
                 </div>
               </div>
-              <button className="mt-4 w-full rounded-xl bg-marigold py-3 text-sm font-bold text-white">
+              <button className="mt-4 w-full rounded-xl bg-[#E0900F] px-3 py-3 text-sm font-bold text-white">
                 {t("phoneCta")}
               </button>
             </div>
@@ -228,133 +228,109 @@ export default function CropGuard() {
       </section>
 
       {/* ---------- PROBLEM STRIP ---------- */}
-      <section className="bg-soil py-16 text-paper-raised">
-        <div className="mx-auto grid max-w-[1180px] gap-6 px-5 md:grid-cols-2">
+      <section className="bg-[#2E241D] py-16 text-[#FFFDF7]">
+        <div className="mx-auto grid max-w-295 gap-7 px-5 md:grid-cols-2">
           <div>
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-marigold-pale before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("probEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
+            <h2 className="font-serif text-[clamp(22px,3vw,30px)] text-white">
               {t("probTitle")}
             </h2>
-            <p className="mt-3 text-sm text-[#D9D2C2] sm:text-base">
-              {t("probBody")}
-            </p>
+            <p className="mt-3 text-[15px] text-[#D9D2C2]">{t("probBody")}</p>
           </div>
           <div>
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-marigold-pale before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("solEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
+            <h2 className="font-serif text-[clamp(22px,3vw,30px)] text-white">
               {t("solTitle")}
             </h2>
-            <p className="mt-3 text-sm text-[#D9D2C2] sm:text-base">
-              {t("solBody")}
-            </p>
+            <p className="mt-3 text-[15px] text-[#D9D2C2]">{t("solBody")}</p>
           </div>
         </div>
       </section>
 
       {/* ---------- PILLARS ---------- */}
       <section id="pillars" className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-2xl">
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("pillarsEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
+            <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
               {t("pillarsTitle")}
             </h2>
-            <p className="mt-3 text-sm text-soil-70 sm:text-base">
+            <p className="mt-3 text-[15.5px] text-[#5A4A3E]">
               {t("pillarsSub")}
             </p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-line bg-paper-raised p-6">
-              <svg
-                className="h-9 w-9 text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              {
+                icon: "M12 3v18M5 8l7-5 7 5M4 21h16",
+                title: t("p1Title"),
+                body: t("p1Body"),
+                list: [t("p1L1"), t("p1L2")],
+              },
+              {
+                icon: "M3 12h4l3-8 4 16 3-8h4",
+                title: t("p2Title"),
+                body: t("p2Body"),
+                list: [t("p2L1"), t("p2L2")],
+              },
+              {
+                icon: "M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+                title: t("p3Title"),
+                body: t("p3Body"),
+                list: [t("p3L1"), t("p3L2")],
+              },
+              {
+                icon: "M3 3v18h18M7 15l4-5 3 3 5-7",
+                title: t("p4Title"),
+                body: t("p4Body"),
+                list: [t("p4L1"), t("p4L2")],
+              },
+            ].map((pillar) => (
+              <div
+                key={pillar.title}
+                className="flex flex-col gap-2.5 rounded-[14px] border border-[#DCD5C3] bg-[#FFFDF7] p-5"
               >
-                <path d="M12 3v18M5 8l7-5 7 5M4 21h16" />
-              </svg>
-              <h3 className="text-lg font-semibold">{t("p1Title")}</h3>
-              <p className="text-sm text-soil-70">{t("p1Body")}</p>
-              <ul className="mt-1.5 list-disc pl-5 text-sm text-soil-70">
-                <li className="mb-1">{t("p1L1")}</li>
-                <li className="mb-1">{t("p1L2")}</li>
-              </ul>
-            </div>
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-line bg-paper-raised p-6">
-              <svg
-                className="h-9 w-9 text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M3 12h4l3-8 4 16 3-8h4" />
-              </svg>
-              <h3 className="text-lg font-semibold">{t("p2Title")}</h3>
-              <p className="text-sm text-soil-70">{t("p2Body")}</p>
-              <ul className="mt-1.5 list-disc pl-5 text-sm text-soil-70">
-                <li className="mb-1">{t("p2L1")}</li>
-                <li className="mb-1">{t("p2L2")}</li>
-              </ul>
-            </div>
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-line bg-paper-raised p-6">
-              <svg
-                className="h-9 w-9 text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
-              <h3 className="text-lg font-semibold">{t("p3Title")}</h3>
-              <p className="text-sm text-soil-70">{t("p3Body")}</p>
-              <ul className="mt-1.5 list-disc pl-5 text-sm text-soil-70">
-                <li className="mb-1">{t("p3L1")}</li>
-                <li className="mb-1">{t("p3L2")}</li>
-              </ul>
-            </div>
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-line bg-paper-raised p-6">
-              <svg
-                className="h-9 w-9 text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M3 3v18h18M7 15l4-5 3 3 5-7" />
-              </svg>
-              <h3 className="text-lg font-semibold">{t("p4Title")}</h3>
-              <p className="text-sm text-soil-70">{t("p4Body")}</p>
-              <ul className="mt-1.5 list-disc pl-5 text-sm text-soil-70">
-                <li className="mb-1">{t("p4L1")}</li>
-                <li className="mb-1">{t("p4L2")}</li>
-              </ul>
-            </div>
+                <svg
+                  className="h-9 w-9 text-[#2C5A38]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.6}
+                >
+                  <path d={pillar.icon} />
+                </svg>
+                <h3 className="font-serif text-[18px] text-[#2E241D]">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm text-[#5A4A3E]">{pillar.body}</p>
+                <ul className="ml-4 mt-1 list-disc space-y-1 text-[13px] text-[#5A4A3E]">
+                  {pillar.list.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ---------- DEMO ---------- */}
-      <section id="demo" className="bg-leaf-pale py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-2xl">
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+      <section id="demo" className="bg-[#E7F0E1] py-16">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("demoEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
+            <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
               {t("demoTitle")}
             </h2>
-            <p className="mt-3 text-sm text-soil-70 sm:text-base">
-              {t("demoSub")}
-            </p>
+            <p className="mt-3 text-[15.5px] text-[#5A4A3E]">{t("demoSub")}</p>
           </div>
           <div className="grid gap-7 lg:grid-cols-[0.85fr_1.15fr]">
             <div className="flex flex-col gap-3">
@@ -367,98 +343,101 @@ export default function CropGuard() {
               ).map(([key, swatch, titleKey, subKey]) => (
                 <button
                   key={key}
-                  className={`flex w-full items-center gap-3.5 rounded-xl border-2 bg-paper-raised px-4 py-3.5 text-left ${
-                    currentCase === key
-                      ? "border-leaf shadow-lg"
-                      : "border-line"
-                  }`}
+                  className={`flex w-full items-center gap-3 rounded-xl border-2 bg-[#FFFDF7] p-3.5 text-left ${currentCase === key ? "border-[#3F7D4C] shadow-[0_6px_18px_-10px_rgba(63,125,76,0.5)]" : "border-[#DCD5C3]"}`}
                   onClick={() => setCurrentCase(key)}
                 >
                   <span
-                    className={`h-11 w-11 flex-none rounded-lg ${swatch}`}
+                    className={`h-11.5 w-11.5 shrink-0 rounded-[10px] ${swatch === "healthy" ? "bg-linear-to-br from-[#7ABF83] to-[#3F7D4C]" : swatch === "medium" ? "bg-linear-to-br from-[#F2C15A] to-[#E0900F]" : "bg-linear-to-br from-[#E3897F] to-[#C1443C]"}`}
                   />
                   <span>
-                    <strong className="block text-sm font-semibold">
+                    <strong className="block text-[14.5px] text-[#2E241D]">
                       {t(titleKey)}
                     </strong>
-                    <span className="text-xs text-soil-70">{t(subKey)}</span>
+                    <span className="text-[12.5px] text-[#5A4A3E]">
+                      {t(subKey)}
+                    </span>
                   </span>
                 </button>
               ))}
             </div>
 
-            <div className="rounded-2xl border border-line bg-paper-raised p-6">
-              <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="rounded-[14px] border border-[#DCD5C3] bg-[#FFFDF7] p-6">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <strong className="block text-lg font-semibold">
+                  <strong className="block text-[19px] text-[#2E241D]">
                     {titleMain}
                   </strong>
-                  <span className="text-sm text-soil-70">{titleSub}</span>
+                  <span className="text-[13px] text-[#5A4A3E]">{titleSub}</span>
                 </div>
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-bold ${
+                  className={`rounded-full px-3 py-1.5 text-[12px] font-bold ${
                     c.badge === "low"
-                      ? "bg-leaf-pale text-leaf-dark"
+                      ? "bg-[#E7F0E1] text-[#2C5A38]"
                       : c.badge === "med"
-                        ? "bg-marigold-pale text-[#8A5A05]"
-                        : "bg-alert-pale text-alert"
+                        ? "bg-[#FBEBCE] text-[#8A5A05]"
+                        : "bg-[#F7E2DF] text-[#C1443C]"
                   }`}
                 >
                   {t(c.badgeText)}
                 </span>
               </div>
-              <div className="mt-5 flex items-center gap-3">
-                <div className="relative h-16 w-16 flex-none">
-                  <svg width="64" height="64" className="-rotate-90">
+
+              <div className="flex items-center gap-3">
+                <div className="relative h-16 w-16 shrink-0">
+                  <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64">
                     <circle
-                      className="fill-none stroke-line stroke-7"
                       cx="32"
                       cy="32"
                       r="26"
+                      fill="none"
+                      stroke="#DCD5C3"
+                      strokeWidth="7"
                     />
                     <circle
-                      className="fill-none transition-all duration-800 ease-out"
                       cx="32"
                       cy="32"
                       r="26"
-                      strokeWidth="7"
+                      fill="none"
                       strokeLinecap="round"
-                      style={{
-                        strokeDasharray: CIRC,
-                        strokeDashoffset: demoOffset,
-                        stroke: ringColor(c.severity),
-                      }}
+                      strokeWidth="7"
+                      strokeDasharray={CIRC}
+                      strokeDashoffset={demoOffset}
+                      stroke={ringColor(c.severity)}
                     />
                   </svg>
-                  <div className="absolute inset-0 flex items-center justify-center text-sm font-bold text-soil">
+                  <div className="absolute inset-0 flex items-center justify-center text-[13px] font-bold text-[#2E241D]">
                     {c.severity}%
                   </div>
                 </div>
-                <div className="text-xs text-soil-70">
-                  <strong className="block text-sm font-bold text-soil">
+                <div className="text-[12px] text-[#5A4A3E]">
+                  <strong className="block text-[14px] font-bold text-[#2E241D]">
                     {t("ringSeverity")}
                   </strong>
-                  {t("ringSub1")}
+                  <span>{t("ringSub1")}</span>
                 </div>
               </div>
+
               <div className="mt-5">
-                <h4 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-soil-70">
+                <h4 className="mb-2.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-[#5A4A3E]">
                   {t("advH4")}
                 </h4>
-                <ul className="flex flex-col gap-2">
+                <ul className="space-y-2">
                   {c.checklist[lang].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-sm">
-                      <span className="font-bold text-leaf">✓</span>
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-[14.5px] text-[#2E241D] before:text-[#3F7D4C] before:content-['✓'] before:font-bold"
+                    >
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-4 rounded-lg border-l-4 border-sky bg-sky-pale px-3.5 py-3 text-sm text-[#2C4A59]">
+
+              <div className="mt-4 rounded-lg border-l-4 border-[#4C7A94] bg-[#E3EDF1] px-3.5 py-3 text-[13.5px] text-[#2C4A59]">
                 {safetyText}
               </div>
               {c.refer && (
-                <div className="mt-3.5 rounded-lg border-l-4 border-marigold bg-marigold-pale px-3.5 py-3 text-sm text-[#7A5107]">
+                <div className="mt-4 rounded-lg border-l-4 border-[#E0900F] bg-[#FBEBCE] px-3.5 py-3 text-[13.5px] text-[#7A5107]">
                   {t("referNote")}
                 </div>
               )}
@@ -469,35 +448,35 @@ export default function CropGuard() {
 
       {/* ---------- VOICE ASSISTANT ---------- */}
       <section className="py-16">
-        <div className="mx-auto grid max-w-295 items-center gap-7 px-5 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-7 px-5 lg:grid-cols-2">
           <div>
-            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("voiceEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
+            <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
               {t("voiceTitle")}
             </h2>
-            <p className="mt-3 text-sm text-soil-70 sm:text-base">
+            <p className="mt-3 text-[15.5px] text-[#5A4A3E]">
               {t("voiceBody")}
             </p>
           </div>
-          <div className="rounded-2xl border border-line bg-paper-raised p-5">
-            <div className="mb-2.5 ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-leaf px-3.5 py-2.5 text-sm text-white">
+          <div className="rounded-[14px] border border-[#DCD5C3] bg-[#FFFDF7] p-5">
+            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-1 mb-2.5">
               {t("chat1")}
             </div>
-            <div className="mb-2.5 max-w-[78%] rounded-2xl rounded-bl-md border border-line bg-paper px-3.5 py-2.5 text-sm">
+            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-1 mb-2.5">
               {t("chat2")}
             </div>
-            <div className="mb-2.5 ml-auto max-w-[78%] rounded-2xl rounded-br-md bg-leaf px-3.5 py-2.5 text-sm text-white">
+            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-1 mb-2.5">
               {t("chat3")}
             </div>
-            <div className="mb-2.5 max-w-[78%] rounded-2xl rounded-bl-md border border-line bg-paper px-3.5 py-2.5 text-sm">
+            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-1 mb-3">
               {t("chat4")}
             </div>
-            <div className="mt-3.5 flex items-center gap-3">
+            <div className="flex items-center gap-3">
               <button
-                className="flex h-12 w-12 flex-none animate-pulse items-center justify-center rounded-full bg-marigold text-white"
                 aria-label="Speak"
+                className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-[#E0900F] text-white shadow-[0_0_0_0_rgba(224,144,15,0.45)] animate-[pulse_2.2s_infinite]"
               >
                 <svg
                   width="20"
@@ -511,7 +490,7 @@ export default function CropGuard() {
                   <path d="M5 10a7 7 0 0 0 14 0M12 19v3" />
                 </svg>
               </button>
-              <span className="text-sm text-soil-70">{t("micHint")}</span>
+              <span className="text-[13px] text-[#5A4A3E]">{t("micHint")}</span>
             </div>
           </div>
         </div>
@@ -519,47 +498,38 @@ export default function CropGuard() {
 
       {/* ---------- DASHBOARD ---------- */}
       <section id="dashboard" className="bg-soil py-16 text-paper-raised">
-        <div className="mx-auto max-w-295 px-5">
+        <div className="mx-auto max-w-[1180px] px-5">
           <div className="mb-9 max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-marigold-pale before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("dashEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
+            <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-white">
               {t("dashTitle")}
             </h2>
-            <p className="mt-3 text-sm text-[#C8BFA9] sm:text-base">
-              {t("dashSub")}
-            </p>
+            <p className="mt-3 text-[15.5px] text-[#C8BFA9]">{t("dashSub")}</p>
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
-            <div className="rounded-xl border border-[#4A3D31] bg-[#3A2F26] p-4">
-              <strong className="block font-display text-2xl font-semibold text-white">
-                214
-              </strong>
-              <span className="text-xs text-[#C8BFA9]">{t("stat4")}</span>
-            </div>
-            <div className="rounded-xl border border-[#4A3D31] bg-[#3A2F26] p-4">
-              <strong className="block font-display text-2xl font-semibold text-white">
-                18
-              </strong>
-              <span className="text-xs text-[#C8BFA9]">{t("stat5")}</span>
-            </div>
-            <div className="rounded-xl border border-[#4A3D31] bg-[#3A2F26] p-4">
-              <strong className="block font-display text-2xl font-semibold text-white">
-                91%
-              </strong>
-              <span className="text-xs text-[#C8BFA9]">{t("stat6")}</span>
-            </div>
-            <div className="rounded-xl border border-[#4A3D31] bg-[#3A2F26] p-4">
-              <strong className="block font-display text-2xl font-semibold text-white">
-                6
-              </strong>
-              <span className="text-xs text-[#C8BFA9]">{t("stat7")}</span>
-            </div>
+          <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["214", t("stat4")],
+              ["18", t("stat5")],
+              ["91%", t("stat6")],
+              ["6", t("stat7")],
+            ].map(([value, label], i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-[#4A3D31] bg-[#3A2F26] p-4"
+              >
+                <strong className="block font-serif text-[26px] text-white">
+                  {value}
+                </strong>
+                <span className="text-[12.5px] text-[#C8BFA9]">{label}</span>
+              </div>
+            ))}
           </div>
-          <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-2xl border border-[#4A3D31] bg-[#3A2F26] p-5">
-              <h3 className="mb-3.5 text-base font-semibold text-white">
+
+          <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
+            <div className="rounded-[14px] border border-[#4A3D31] bg-[#3A2F26] p-5">
+              <h3 className="mb-4 font-serif text-[16px] text-white">
                 {t("panel1Title")}
               </h3>
               <div className="flex h-30 items-end gap-2">
@@ -571,29 +541,36 @@ export default function CropGuard() {
                   ["Fri", 82, true],
                   ["Sat", 55, false],
                   ["Sun", 40, false],
-                ].map(([day, h, risk], i) => (
+                ].map(([day, height, risk], i) => (
                   <div
                     key={i}
-                    className={`relative flex-1 rounded-t ${risk ? "bg-marigold" : "bg-leaf"}`}
-                    style={{ height: `${h}%` }}
+                    className="relative flex-1 rounded-t-sm bg-[#3F7D4C]"
+                    style={{ height: `${height}%` }}
                   >
-                    <span className="absolute -bottom-5 left-0 right-0 text-center text-[10px] text-[#C8BFA9]">
+                    <span
+                      className={`absolute inset-x-0 -bottom-5 text-center text-[10px] text-[#C8BFA9] ${risk ? "bg-[#E0900F]" : "bg-[#3F7D4C]"}`}
+                      style={{ height: risk ? "100%" : "0px" }}
+                    />
+                    <span className="absolute inset-x-0 -bottom-5 text-center text-[10px] text-[#C8BFA9]">
                       {day as string}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-[#4A3D31] bg-[#3A2F26] p-5">
-              <h3 className="mb-3.5 text-base font-semibold text-white">
+            <div className="rounded-[14px] border border-[#4A3D31] bg-[#3A2F26] p-5">
+              <h3 className="mb-4 font-serif text-[16px] text-white">
                 {t("panel2Title")}
               </h3>
-              <div className="mt-1.5 grid grid-cols-9 gap-1">
+              <div className="mt-1 grid grid-cols-9 gap-1">
                 {hotspotLevels.map((lvl, i) => (
-                  <i key={i} className={`aspect-square rounded-sm ${lvl}`} />
+                  <i
+                    key={i}
+                    className={`block aspect-square rounded-[3px] ${lvl === "l1" ? "bg-[#3F7D4C]" : lvl === "l2" ? "bg-[#E0900F]" : "bg-[#C1443C]"}`}
+                  />
                 ))}
               </div>
-              <p className="mt-2.5 text-xs text-[#C8BFA9]">
+              <p className="mt-3 text-[12px] text-[#C8BFA9]">
                 {t("hotspotLegend")}
               </p>
             </div>
@@ -603,43 +580,49 @@ export default function CropGuard() {
 
       {/* ---------- ALERTS ---------- */}
       <section id="alerts" className="py-16">
-        <div className="mx-auto max-w-195 px-5">
+        <div className="mx-auto max-w-[1180px] px-5">
           <div className="mb-9 max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("alertsEyebrow")}
             </p>
-            <h2 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">
+            <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
               {t("alertsTitle")}
             </h2>
-            <p className="mt-3 text-sm text-soil-70 sm:text-base">
+            <p className="mt-3 text-[15.5px] text-[#5A4A3E]">
               {t("alertsSub")}
             </p>
           </div>
           <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-start gap-3 rounded-lg border border-line border-l-4 border-l-alert bg-paper-raised px-4 py-4">
-              <strong className="text-sm font-semibold">
+            <div className="flex flex-wrap items-start gap-3 rounded-[10px] border border-[#DCD5C3] border-l-4 border-l-[#C1443C] bg-[#FFFDF7] p-4">
+              <strong className="text-[14.5px] text-[#2E241D]">
                 {t("alert1Title")}
               </strong>
-              <p className="w-full text-sm text-soil-70">{t("alert1Body")}</p>
-              <time className="ml-auto whitespace-nowrap text-xs text-soil-70">
+              <p className="w-full text-[13.5px] text-[#5A4A3E]">
+                {t("alert1Body")}
+              </p>
+              <time className="ml-auto text-[12px] text-[#5A4A3E]">
                 {t("alert1Time")}
               </time>
             </div>
-            <div className="flex flex-wrap items-start gap-3 rounded-lg border border-line border-l-4 border-l-marigold bg-paper-raised px-4 py-4">
-              <strong className="text-sm font-semibold">
+            <div className="flex flex-wrap items-start gap-3 rounded-[10px] border border-[#DCD5C3] border-l-4 border-l-[#E0900F] bg-[#FFFDF7] p-4">
+              <strong className="text-[14.5px] text-[#2E241D]">
                 {t("alert2Title")}
               </strong>
-              <p className="w-full text-sm text-soil-70">{t("alert2Body")}</p>
-              <time className="ml-auto whitespace-nowrap text-xs text-soil-70">
+              <p className="w-full text-[13.5px] text-[#5A4A3E]">
+                {t("alert2Body")}
+              </p>
+              <time className="ml-auto text-[12px] text-[#5A4A3E]">
                 {t("alert2Time")}
               </time>
             </div>
-            <div className="flex flex-wrap items-start gap-3 rounded-lg border border-line border-l-4 border-l-sky bg-paper-raised px-4 py-4">
-              <strong className="text-sm font-semibold">
+            <div className="flex flex-wrap items-start gap-3 rounded-[10px] border border-[#DCD5C3] border-l-4 border-l-[#4C7A94] bg-[#FFFDF7] p-4">
+              <strong className="text-[14.5px] text-[#2E241D]">
                 {t("alert3Title")}
               </strong>
-              <p className="w-full text-sm text-soil-70">{t("alert3Body")}</p>
-              <time className="ml-auto whitespace-nowrap text-xs text-soil-70">
+              <p className="w-full text-[13.5px] text-[#5A4A3E]">
+                {t("alert3Body")}
+              </p>
+              <time className="ml-auto text-[12px] text-[#5A4A3E]">
                 {t("alert3Time")}
               </time>
             </div>
@@ -651,63 +634,47 @@ export default function CropGuard() {
       <section className="py-16">
         <div className="mx-auto max-w-295 px-5">
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="flex items-start gap-3">
-              <svg
-                className="mt-0.5 h-6 w-6 flex-none text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6z" />
-              </svg>
-              <div>
-                <strong className="block text-sm font-semibold">
-                  {t("trust1Title")}
-                </strong>
-                <p className="mt-0.5 text-sm text-soil-70">{t("trust1Body")}</p>
+            {[
+              {
+                icon: "M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6z",
+                title: t("trust1Title"),
+                body: t("trust1Body"),
+              },
+              {
+                icon: "M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3",
+                title: t("trust2Title"),
+                body: t("trust2Body"),
+              },
+              {
+                icon: "M12 19V5M5 12l7-7 7 7",
+                title: t("trust3Title"),
+                body: t("trust3Body"),
+              },
+            ].map((item) => (
+              <div key={item.title} className="flex items-start gap-3">
+                <svg
+                  className="mt-0.5 h-6 w-6 shrink-0 text-[#2C5A38]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.6}
+                >
+                  <path d={item.icon} />
+                </svg>
+                <div>
+                  <strong className="block text-[14.5px] text-[#2E241D]">
+                    {item.title}
+                  </strong>
+                  <p className="mt-1 text-[13px] text-[#5A4A3E]">{item.body}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <svg
-                className="mt-0.5 h-6 w-6 flex-none text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3" />
-              </svg>
-              <div>
-                <strong className="block text-sm font-semibold">
-                  {t("trust2Title")}
-                </strong>
-                <p className="mt-0.5 text-sm text-soil-70">{t("trust2Body")}</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <svg
-                className="mt-0.5 h-6 w-6 flex-none text-leaf-dark"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-              >
-                <path d="M12 19V5M5 12l7-7 7 7" />
-              </svg>
-              <div>
-                <strong className="block text-sm font-semibold">
-                  {t("trust3Title")}
-                </strong>
-                <p className="mt-0.5 text-sm text-soil-70">{t("trust3Body")}</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       <footer className="border-t border-line py-6 text-sm text-soil-70">
-        <div className="mx-auto flex max-w-295 flex-wrap justify-between gap-2.5 px-5">
+        <div className="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-2.5 px-5">
           <span>
             CropGuard — SIH 2026 · Problem Statement 26131 · Govt. of
             Maharashtra
