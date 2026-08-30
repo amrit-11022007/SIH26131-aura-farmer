@@ -67,8 +67,8 @@ function waitForServer(url, timeout = 90000) {
 
 function createWindow() {
   const window = new BrowserWindow({
-    width: 1400,
-    height: 900,
+    width: 440,
+    height: 956,
 
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
