@@ -448,7 +448,7 @@ export default function CropGuard() {
 
       {/* ---------- VOICE ASSISTANT ---------- */}
       <section className="py-16">
-        <div className="mx-auto grid max-w-295 gap-7 px-5 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-7 px-5 lg:grid-cols-2">
           <div>
             <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("voiceEyebrow")}
@@ -497,10 +497,10 @@ export default function CropGuard() {
       </section>
 
       {/* ---------- DASHBOARD ---------- */}
-      <section id="dashboard" className="bg-[#2E241D] py-16 text-[#FFFDF7]">
-        <div className="mx-auto max-w-295 px-5">
-          <div className="mb-9 max-w-160">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
+      <section id="dashboard" className="bg-soil py-16 text-paper-raised">
+        <div className="mx-auto max-w-[1180px] px-5">
+          <div className="mb-9 max-w-2xl">
+            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-marigold-pale before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("dashEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-white">
@@ -580,9 +580,9 @@ export default function CropGuard() {
 
       {/* ---------- ALERTS ---------- */}
       <section id="alerts" className="py-16">
-        <div className="mx-auto max-w-295 px-5">
-          <div className="mb-9 max-w-160">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
+        <div className="mx-auto max-w-[1180px] px-5">
+          <div className="mb-9 max-w-2xl">
+            <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("alertsEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
@@ -673,8 +673,8 @@ export default function CropGuard() {
         </div>
       </section>
 
-      <footer className="border-t border-[#DCD5C3] py-6">
-        <div className="mx-auto flex max-w-295 flex-wrap items-center justify-between gap-2 px-5 text-[13px] text-[#5A4A3E]">
+      <footer className="border-t border-line py-6 text-sm text-soil-70">
+        <div className="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-2.5 px-5">
           <span>
             CropGuard — SIH 2026 · Problem Statement 26131 · Govt. of
             Maharashtra
