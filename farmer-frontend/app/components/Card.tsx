@@ -9,17 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-export interface CardData {
-  type: string;
-  name: string;
-  timing: string;
-  severity: string;
-  location: string;
-  description: string;
-  recommendation: string;
-  link: string;
-}
+import Link from "next/link";
+import { type CardData } from "../types/components";
 
 const cardBorderStyles: Record<string, string> = {
   low: "border-[#1F8A70] shadow-[0_0_0_1px_#1F8A70] shadow-sm",
@@ -94,7 +85,7 @@ export function AlertCard({ data }: { data: CardData }) {
       </CardContent>
 
       <CardFooter className="border-t border-slate-100 bg-slate-50/80 px-4 py-3">
-        <a href={data.link} className="mx-auto inline-flex">
+        <Link href={`/alerts/${data.id}`} className="mx-auto inline-flex">
           <Button
             type="button"
             size="lg"
@@ -102,7 +93,7 @@ export function AlertCard({ data }: { data: CardData }) {
           >
             View Details
           </Button>
-        </a>
+        </Link>
       </CardFooter>
     </Card>
   );

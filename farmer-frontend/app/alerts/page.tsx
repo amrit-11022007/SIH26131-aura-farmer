@@ -1,31 +1,5 @@
-import AlertCard, { type CardData } from "../components/Card";
-
-const alertData: CardData[] = [
-  {
-    type: "Weather",
-    name: "Heavy Rain Warning",
-    timing: "2h",
-    severity: "High",
-    location: "North Farmland Block A",
-    description:
-      "Forecast indicates intense rainfall in the next 6 hours, increasing the risk of crop waterlogging and nutrient loss.",
-    recommendation:
-      "Drain excess water from low-lying fields and postpone irrigation for 24 hours.",
-    link: "/alerts/report/heavy-rain",
-  },
-  {
-    type: "Pest",
-    name: "Brown Planthopper Alert",
-    timing: "4d",
-    severity: "Critical",
-    location: "Rice Plot 12",
-    description:
-      "A sudden rise in pest pressure has been detected in the region, with visible feeding damage on the crop canopy.",
-    recommendation:
-      "Inspect affected rows immediately and apply recommended integrated pest management treatment.",
-    link: "/alerts/report/planthopper",
-  },
-];
+import AlertCard from "../components/Card";
+import { alertData } from "../data/alerts";
 
 export default function Alert() {
   return (
