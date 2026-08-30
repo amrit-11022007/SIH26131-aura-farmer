@@ -11,7 +11,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     heroTitle: "Catch crop disease <em>before</em> it spreads.",
     heroLede:
       "Point your phone at a leaf. CropGuard identifies the disease or pest, forecasts outbreak risk from weather and field data, and gives a safe, local-language plan — even offline.",
-    heroCta1: "Try a diagnosis",
+    heroCta1: "Farmer Login",
     heroCta2: "See officer dashboard",
     stat1: "languages, more on the way",
     stat2: "works without signal",
@@ -129,7 +129,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     heroTitle: "फसल रोग फैलने से <em>पहले</em> पकड़ें।",
     heroLede:
       "अपने फोन को पत्ती पर रखें। CropGuard रोग या कीट की पहचान करता है, मौसम और खेत के डेटा से खतरे का पूर्वानुमान लगाता है, और सुरक्षित, स्थानीय भाषा में सलाह देता है — ऑफ़लाइन भी।",
-    heroCta1: "निदान आज़माएं",
+    heroCta1: "किसान लॉगिन",
     heroCta2: "अधिकारी डैशबोर्ड देखें",
     stat1: "भाषाएं, और जल्द आएंगी",
     stat2: "बिना नेटवर्क के काम करता है",
@@ -246,7 +246,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     heroTitle: "पीक रोग पसरण्या<em>आधी</em> पकडा.",
     heroLede:
       "तुमचा फोन पानावर धरा. CropGuard रोग किंवा कीड ओळखतो, हवामान व शेतातील माहितीवरून धोक्याचा अंदाज देतो, आणि सुरक्षित, स्थानिक भाषेत सल्ला देतो — ऑफलाइन सुद्धा.",
-    heroCta1: "निदान करून पहा",
+    heroCta1: "शेतकऱ्यांना लॉगिन",
     heroCta2: "अधिकारी डॅशबोर्ड पहा",
     stat1: "भाषा, अजून येत आहेत",
     stat2: "नेटवर्कशिवाय चालते",

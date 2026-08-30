@@ -59,9 +59,9 @@ export default function CropGuard() {
     <div className="bg-[#F4F0E4] text-[#2E241D] antialiased leading-6 font-sans">
       {/* ---------- NAV ---------- */}
       <header className="sticky top-0 z-40 border-b border-[#DCD5C3] bg-[#F4F0E4]/90 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-3 px-5 py-3.5 lg:px-5">
+        <div className="mx-auto flex max-w-295 items-center justify-between gap-3 px-5 py-3.5 lg:px-5">
           <div className="flex items-center gap-2.5 font-serif text-[19px] font-bold text-[#2E241D]">
-            <svg className="h-[30px] w-[30px] shrink-0" viewBox="0 0 32 32">
+            <svg className="h-7.5 w-7.5 shrink-0" viewBox="0 0 32 32">
               <path
                 d="M16 3C9 3 4 9 4 16c0 6 4 11 9 12.5C13.5 22 15 15 22 9c-5 3-8 7-9.5 12C21 19 27 12 27 5c-4 0-8 1-11-2z"
                 fill="#3F7D4C"
@@ -121,9 +121,9 @@ export default function CropGuard() {
 
       {/* ---------- HERO ---------- */}
       <section className="py-14 md:py-16">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-5 md:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div className="mx-auto grid max-w-295 items-center gap-10 px-5 md:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("heroEyebrow")}
             </p>
             <h1
@@ -134,12 +134,12 @@ export default function CropGuard() {
               {t("heroLede")}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a
-                href="#demo"
+              <Link
+                href="/login"
                 className="inline-flex items-center gap-2 rounded-full bg-[#3F7D4C] px-5 py-3.5 text-[15px] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#2C5A38]"
               >
                 {t("heroCta1")}
-              </a>
+              </Link>
               <Link
                 href="/dashboard"
                 className="inline-flex items-center gap-2 rounded-full border border-[#2E241D] bg-transparent px-5 py-3.5 text-[15px] font-semibold text-[#2E241D] transition hover:-translate-y-0.5"
@@ -169,14 +169,14 @@ export default function CropGuard() {
             </div>
           </div>
 
-          <div className="mx-auto w-[min(300px,84vw)] rounded-[34px] bg-[#2E241D] p-[14px] shadow-[0_24px_50px_-20px_rgba(46,36,29,0.45)]">
-            <div className="min-h-[420px] rounded-[22px] bg-[#FFFDF7] p-4 pb-5">
+          <div className="mx-auto w-[min(300px,84vw)] rounded-[34px] bg-[#2E241D] p-3.5 shadow-[0_24px_50px_-20px_rgba(46,36,29,0.45)]">
+            <div className="min-h-105 rounded-[22px] bg-[#FFFDF7] p-4 pb-5">
               <div className="mb-3 flex items-center justify-between text-[11px] font-semibold text-[#5A4A3E]">
                 <span>{t("phoneTop1")}</span>
                 <span>{t("phoneTop2")}</span>
               </div>
               <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-[#3F7D4C] bg-[#E7F0E1]">
-                <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-[#E0900F] to-transparent animate-[scanmove_2.4s_ease-in-out_infinite]" />
+                <div className="absolute inset-x-0 top-0 h-0.75 bg-linear-to-r from-transparent via-[#E0900F] to-transparent animate-[scanmove_2.4s_ease-in-out_infinite]" />
                 <svg viewBox="0 0 100 100" className="w-[58%]">
                   <path
                     d="M50 8C25 8 10 30 10 52c0 20 14 36 30 40C33 66 40 42 62 22c-15 10-24 24-28 40C58 58 82 38 82 15c-13 0-26 3-32-7z"
@@ -229,9 +229,9 @@ export default function CropGuard() {
 
       {/* ---------- PROBLEM STRIP ---------- */}
       <section className="bg-[#2E241D] py-16 text-[#FFFDF7]">
-        <div className="mx-auto grid max-w-[1180px] gap-7 px-5 md:grid-cols-2">
+        <div className="mx-auto grid max-w-295 gap-7 px-5 md:grid-cols-2">
           <div>
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("probEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(22px,3vw,30px)] text-white">
@@ -240,7 +240,7 @@ export default function CropGuard() {
             <p className="mt-3 text-[15px] text-[#D9D2C2]">{t("probBody")}</p>
           </div>
           <div>
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("solEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(22px,3vw,30px)] text-white">
@@ -253,9 +253,9 @@ export default function CropGuard() {
 
       {/* ---------- PILLARS ---------- */}
       <section id="pillars" className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-[640px]">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("pillarsEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
@@ -322,9 +322,9 @@ export default function CropGuard() {
 
       {/* ---------- DEMO ---------- */}
       <section id="demo" className="bg-[#E7F0E1] py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-[640px]">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("demoEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
@@ -347,7 +347,7 @@ export default function CropGuard() {
                   onClick={() => setCurrentCase(key)}
                 >
                   <span
-                    className={`h-[46px] w-[46px] shrink-0 rounded-[10px] ${swatch === "healthy" ? "bg-gradient-to-br from-[#7ABF83] to-[#3F7D4C]" : swatch === "medium" ? "bg-gradient-to-br from-[#F2C15A] to-[#E0900F]" : "bg-gradient-to-br from-[#E3897F] to-[#C1443C]"}`}
+                    className={`h-11.5 w-11.5 shrink-0 rounded-[10px] ${swatch === "healthy" ? "bg-linear-to-br from-[#7ABF83] to-[#3F7D4C]" : swatch === "medium" ? "bg-linear-to-br from-[#F2C15A] to-[#E0900F]" : "bg-linear-to-br from-[#E3897F] to-[#C1443C]"}`}
                   />
                   <span>
                     <strong className="block text-[14.5px] text-[#2E241D]">
@@ -448,9 +448,9 @@ export default function CropGuard() {
 
       {/* ---------- VOICE ASSISTANT ---------- */}
       <section className="py-16">
-        <div className="mx-auto grid max-w-[1180px] gap-7 px-5 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto grid max-w-295 gap-7 px-5 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("voiceEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
@@ -461,22 +461,22 @@ export default function CropGuard() {
             </p>
           </div>
           <div className="rounded-[14px] border border-[#DCD5C3] bg-[#FFFDF7] p-5">
-            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-[4px] mb-2.5">
+            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-1 mb-2.5">
               {t("chat1")}
             </div>
-            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-[4px] mb-2.5">
+            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-1 mb-2.5">
               {t("chat2")}
             </div>
-            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-[4px] mb-2.5">
+            <div className="max-w-[78%] rounded-[14px] bg-[#3F7D4C] px-3.5 py-2.5 text-[14px] text-white ml-auto rounded-br-1 mb-2.5">
               {t("chat3")}
             </div>
-            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-[4px] mb-3">
+            <div className="max-w-[78%] rounded-[14px] border border-[#DCD5C3] bg-[#F4F0E4] px-3.5 py-2.5 text-[14px] text-[#2E241D] rounded-bl-1 mb-3">
               {t("chat4")}
             </div>
             <div className="flex items-center gap-3">
               <button
                 aria-label="Speak"
-                className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-[#E0900F] text-white shadow-[0_0_0_0_rgba(224,144,15,0.45)] animate-[pulse_2.2s_infinite]"
+                className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-[#E0900F] text-white shadow-[0_0_0_0_rgba(224,144,15,0.45)] animate-[pulse_2.2s_infinite]"
               >
                 <svg
                   width="20"
@@ -498,9 +498,9 @@ export default function CropGuard() {
 
       {/* ---------- DASHBOARD ---------- */}
       <section id="dashboard" className="bg-[#2E241D] py-16 text-[#FFFDF7]">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-[640px]">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#FBEBCE] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("dashEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-white">
@@ -532,7 +532,7 @@ export default function CropGuard() {
               <h3 className="mb-4 font-serif text-[16px] text-white">
                 {t("panel1Title")}
               </h3>
-              <div className="flex h-[120px] items-end gap-2">
+              <div className="flex h-30 items-end gap-2">
                 {[
                   ["Mon", 30, false],
                   ["Tue", 45, false],
@@ -548,10 +548,10 @@ export default function CropGuard() {
                     style={{ height: `${height}%` }}
                   >
                     <span
-                      className={`absolute inset-x-0 bottom-[-20px] text-center text-[10px] text-[#C8BFA9] ${risk ? "bg-[#E0900F]" : "bg-[#3F7D4C]"}`}
+                      className={`absolute inset-x-0 -bottom-5 text-center text-[10px] text-[#C8BFA9] ${risk ? "bg-[#E0900F]" : "bg-[#3F7D4C]"}`}
                       style={{ height: risk ? "100%" : "0px" }}
                     />
-                    <span className="absolute inset-x-0 bottom-[-20px] text-center text-[10px] text-[#C8BFA9]">
+                    <span className="absolute inset-x-0 -bottom-5 text-center text-[10px] text-[#C8BFA9]">
                       {day as string}
                     </span>
                   </div>
@@ -580,9 +580,9 @@ export default function CropGuard() {
 
       {/* ---------- ALERTS ---------- */}
       <section id="alerts" className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
-          <div className="mb-9 max-w-[640px]">
-            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-[2px] before:w-4 before:bg-[#E0900F]">
+        <div className="mx-auto max-w-295 px-5">
+          <div className="mb-9 max-w-160">
+            <p className="mb-3 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#2C5A38] before:inline-block before:h-0.5 before:w-4 before:bg-[#E0900F]">
               {t("alertsEyebrow")}
             </p>
             <h2 className="font-serif text-[clamp(24px,3.6vw,34px)] text-[#2E241D]">
@@ -632,7 +632,7 @@ export default function CropGuard() {
 
       {/* ---------- TRUST STRIP ---------- */}
       <section className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
+        <div className="mx-auto max-w-295 px-5">
           <div className="grid gap-4 md:grid-cols-3">
             {[
               {
@@ -674,7 +674,7 @@ export default function CropGuard() {
       </section>
 
       <footer className="border-t border-[#DCD5C3] py-6">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-2 px-5 text-[13px] text-[#5A4A3E]">
+        <div className="mx-auto flex max-w-295 flex-wrap items-center justify-between gap-2 px-5 text-[13px] text-[#5A4A3E]">
           <span>
             CropGuard — SIH 2026 · Problem Statement 26131 · Govt. of
             Maharashtra
