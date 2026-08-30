@@ -415,7 +415,7 @@ export default function Dashboard() {
 
             </div>
 
-            {/* RIGHT 4-COLUMN SIDEBAR (RISK DONUT & ALERTS) */}
+            {/* COLUMN SIDEBAR (RISK DONUT & ALERTS) */}
             <div className="lg:col-span-4 space-y-6">
               
               {/* RISK DONUT CARD */}
