@@ -469,7 +469,7 @@ export default function CropGuard() {
 
       {/* ---------- VOICE ASSISTANT ---------- */}
       <section className="py-16">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-7 px-5 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-295 items-center gap-7 px-5 lg:grid-cols-2">
           <div>
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("voiceEyebrow")}
@@ -519,7 +519,7 @@ export default function CropGuard() {
 
       {/* ---------- DASHBOARD ---------- */}
       <section id="dashboard" className="bg-soil py-16 text-paper-raised">
-        <div className="mx-auto max-w-[1180px] px-5">
+        <div className="mx-auto max-w-295 px-5">
           <div className="mb-9 max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-marigold-pale before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("dashEyebrow")}
@@ -562,7 +562,7 @@ export default function CropGuard() {
               <h3 className="mb-3.5 text-base font-semibold text-white">
                 {t("panel1Title")}
               </h3>
-              <div className="flex h-[120px] items-end gap-2">
+              <div className="flex h-30 items-end gap-2">
                 {[
                   ["Mon", 30, false],
                   ["Tue", 45, false],
@@ -603,7 +603,7 @@ export default function CropGuard() {
 
       {/* ---------- ALERTS ---------- */}
       <section id="alerts" className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
+        <div className="mx-auto max-w-195 px-5">
           <div className="mb-9 max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("alertsEyebrow")}
@@ -649,7 +649,7 @@ export default function CropGuard() {
 
       {/* ---------- TRUST STRIP ---------- */}
       <section className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
+        <div className="mx-auto max-w-295 px-5">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="flex items-start gap-3">
               <svg
@@ -707,7 +707,7 @@ export default function CropGuard() {
       </section>
 
       <footer className="border-t border-line py-6 text-sm text-soil-70">
-        <div className="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-2.5 px-5">
+        <div className="mx-auto flex max-w-295 flex-wrap justify-between gap-2.5 px-5">
           <span>
             CropGuard — SIH 2026 · Problem Statement 26131 · Govt. of
             Maharashtra
