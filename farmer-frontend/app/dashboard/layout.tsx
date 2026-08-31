@@ -1,13 +1,24 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { useState } from "react";
-import { Bell, Globe, Home, Menu, Scan, Search, User, X } from "lucide-react";
+import {
+  Bell,
+  Globe,
+  Home,
+  Menu,
+  Scan,
+  Search,
+  User,
+  X,
+  TriangleAlert,
+} from "lucide-react";
+import Link from "next/link";
 
-import { SidebarNav } from "@/app/components/dashboard/SidebarNav";
+import { SidebarNav } from "@/app/components/SidebarNav";
 import { navigationItems } from "@/app/data/dashboard";
+import { DashboardContent } from "@/app/dashboard/page";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout() {
   const [activeTab, setActiveTab] = useState("Overview");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("Home");
@@ -92,7 +103,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </div>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
+      {/* Navbar */}
       <div className="md:pl-64 flex-1 min-h-screen pb-20 md:pb-8 flex flex-col min-w-0">
         <header className="hidden md:flex px-8 py-4 bg-[#FDFBF7] items-center justify-between border-b border-[#E7E3D8] sticky top-0 z-20 backdrop-blur-md bg-opacity-90">
           <div className="flex items-center gap-2">
@@ -111,7 +122,15 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               />
             </div>
             <button className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-[#EDE9DE] transition">
-              <Globe className="w-5 h-5" />
+              <Link href="https://www.google.com/maps" target="_blank">
+                <Globe className="w-5 h-5" />
+              </Link>
+            </button>
+            <button className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-[#EDE9DE] transition relative">
+              <Link href="/alerts">
+                <TriangleAlert className="w-5 h-5" />
+              </Link>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-[#F8F6F0]" />
             </button>
             <button className="p-2 text-gray-600 hover:text-gray-900 rounded-full hover:bg-[#EDE9DE] transition relative">
               <Bell className="w-5 h-5" />
@@ -123,7 +142,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        {children}
+        <DashboardContent activeTab={activeTab} />
       </div>
 
       {/* MOBILE BOTTOM NAVIGATION */}

@@ -31,7 +31,6 @@ export const navigationItems: NavigationItem[] = [
   { name: "Expert Review", icon: UserCheck },
   { name: "Field Confirmation", icon: CheckCircle },
   { name: "Pest & Sensor Data", icon: Radio },
-  { name: "Alerts", icon: Bell, badge: "2" },
   { name: "Analytics", icon: BarChart3 },
   { name: "Reports", icon: FileText },
   { name: "Setting", icon: Settings },

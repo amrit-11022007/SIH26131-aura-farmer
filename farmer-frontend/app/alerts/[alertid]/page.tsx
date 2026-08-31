@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
 import { ObjectId } from "mongodb";
 import clientPromise from "@/lib/mongodb";
 import type { CardData } from "@/app/types/components";
-import PercentageCircle from "@/app/dashboard/PercentageCircle";
+import PercentageCircle from "@/app/components/PercentageCircle";
 
 function normalizeAlert(doc: Record<string, any>): CardData {
   const recommendation = Array.isArray(doc.recommendation)

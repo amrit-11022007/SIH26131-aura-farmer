@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { type CardData } from "../types/components";
+import { type CardData } from "@/app/types/components";
 
 const cardBorderStyles: Record<string, string> = {
   low: "border-[#1F8A70] shadow-[0_0_0_1px_#1F8A70] shadow-sm",
