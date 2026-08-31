@@ -5,10 +5,11 @@ import CaseManagement from "@/app/components/dashboard/Case";
 import OutbreakMap from "@/app/components/dashboard/map";
 import ReportsAndHistory from "@/app/components/dashboard/Report";
 import SettingsPage from "@/app/components/dashboard/Setting";
+import Scanner from "@/app/components/dashboard/Scanner";
 
 const dashboardComponents: Record<string, ComponentType> = {
   Overview,
-  "AI Diagnosis": Overview,
+  "AI Diagnosis": Scanner,
   "Risk Forecasting": Overview,
   "Outbreak Map": OutbreakMap,
   Cases: CaseManagement,
