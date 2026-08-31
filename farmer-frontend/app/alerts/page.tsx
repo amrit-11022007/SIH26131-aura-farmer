@@ -1,4 +1,5 @@
-import AlertCard from "../dashboard/Card";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import AlertCard from "@/app/components/dashboard/Card";
 import clientPromise from "@/lib/mongodb";
 import type { CardData } from "@/app/types/components";
 
