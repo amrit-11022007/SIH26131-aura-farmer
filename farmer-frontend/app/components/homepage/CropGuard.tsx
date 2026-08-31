@@ -580,7 +580,7 @@ export default function CropGuard() {
 
       {/* ---------- ALERTS ---------- */}
       <section id="alerts" className="py-16">
-        <div className="mx-auto max-w-[1180px] px-5">
+        <div className="mx-auto max-w-295 px-5">
           <div className="mb-9 max-w-2xl">
             <p className="eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-leaf-dark before:inline-block before:h-0.5 before:w-4 before:bg-marigold">
               {t("alertsEyebrow")}
