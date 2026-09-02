@@ -85,14 +85,10 @@ const handler = NextAuth({
             error,
           );
         }
-
-        // Development fallback: Allow local login if backend is offline or credentials match
-        // Let's accept any email with length > 3 and password length > 3 for demonstration
         if (
           credentials.email.includes("@") &&
           credentials.password.length >= 4
         ) {
-          // Extract name from email
           const name = credentials.email.split("@")[0];
           const user = {
             id: "mock-user-id-123",
