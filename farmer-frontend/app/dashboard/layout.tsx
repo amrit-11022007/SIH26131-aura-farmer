@@ -17,6 +17,7 @@ import Link from "next/link";
 import { SidebarNav } from "@/app/components/SidebarNav";
 import { navigationItems } from "@/app/data/dashboard";
 import { DashboardContent } from "@/app/dashboard/page";
+import BottomNavigation from "@/app/components/dashboard/BottomNavigation";
 
 export default function DashboardLayout() {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -144,41 +145,7 @@ export default function DashboardLayout() {
 
         <DashboardContent activeTab={activeTab} />
       </div>
-
-      {/* MOBILE BOTTOM NAVIGATION */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#EBE7DF] px-6 py-2 flex items-center justify-between shadow-lg">
-        {[
-          { name: "Home", icon: Home },
-          { name: "Scan", icon: Scan },
-          { name: "Alerts", icon: Bell, badge: true },
-          { name: "Profile", icon: User },
-        ].map((item) => {
-          const Icon = item.icon;
-          const isActive = activeNav === item.name;
-
-          return (
-            <button
-              key={item.name}
-              onClick={() => setActiveNav(item.name)}
-              className={`flex flex-col items-center gap-1 relative ${
-                isActive ? "text-[#1C3A27]" : "text-gray-400"
-              }`}
-            >
-              <div
-                className={`p-1.5 rounded-xl ${
-                  isActive ? "bg-[#1C3A27] text-white" : ""
-                }`}
-              >
-                <Icon className="w-5 h-5" />
-              </div>
-              <span className="text-[10px] font-semibold">{item.name}</span>
-              {item.badge && (
-                <span className="absolute top-1 right-3 w-2 h-2 bg-red-500 rounded-full" />
-              )}
-            </button>
-          );
-        })}
-      </div>
+      <BottomNavigation />
     </div>
   );
 }

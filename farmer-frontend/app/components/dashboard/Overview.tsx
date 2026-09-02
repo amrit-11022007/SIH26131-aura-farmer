@@ -31,6 +31,7 @@ import {
 
 import { AlertBanner } from "@/app/components/dashboard/AlertBanner";
 import { outbreakData } from "@/app/data/dashboard";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const [selectedTimeframe] = useState("Last 30 Days");
@@ -75,13 +76,12 @@ export default function DashboardPage() {
               <Download className="w-4 h-4 text-gray-600" />
               <span className="hidden sm:inline">Export</span>
             </button>
-            <button
-              onClick={() => showToast("Opening New AI Scan...")}
-              className="flex items-center gap-2 px-4 py-2 bg-[#1A382B] text-white rounded-xl text-xs md:text-sm font-semibold hover:bg-[#2D6A4F] shadow-sm transition"
-            >
-              <Plus className="w-4 h-4" />
-              <span>New Scan</span>
-            </button>
+            <Link href="/scan?redirect=/dashboard">
+              <button className="flex items-center gap-2 px-4 py-2 bg-[#1A382B] text-white rounded-xl text-xs md:text-sm font-semibold hover:bg-[#2D6A4F] shadow-sm transition">
+                <Plus className="w-4 h-4" />
+                <span>New Scan</span>
+              </button>
+            </Link>
           </div>
         </div>
 
