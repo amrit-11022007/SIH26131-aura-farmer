@@ -18,8 +18,10 @@ import {
   BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/i18n";
 
 export default function LandingPage() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
       <Navbar currentRole="Guest" />
@@ -31,26 +33,26 @@ export default function LandingPage() {
         <div className="relative max-w-5xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-emerald-200 border border-white/20 text-xs font-semibold backdrop-blur">
             <Award className="w-4 h-4 text-emerald-300" />
-            Government & AgriTech Precision Advisory Platform
+            {t("government_agritech_platform")}
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white max-w-4xl mx-auto">
-            Protect Your Crop <br />
+            {t("hero_headline").split("Before")[0]}
+            <br />
             <span className="text-emerald-400">
-              Before the Problem Spreads.
+              Before {t("hero_headline").split("Before")[1]}
             </span>
           </h1>
 
           <p className="text-base sm:text-xl text-emerald-100/90 max-w-2xl mx-auto font-normal leading-relaxed">
-            AI-assisted crop health monitoring, multi-factor risk forecasting,
-            and certified agronomist guidance for smarter farming.
+            {t("hero_subtext")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link href="/farmer/diagnose">
               <Button className="w-full sm:w-auto bg-[#22C55E] hover:bg-emerald-500 text-gray-950 font-bold px-8 py-6 rounded-2xl text-base shadow-lg shadow-emerald-900/40 transition-all flex items-center justify-center gap-2">
                 <Scan className="w-5 h-5" />
-                Check Crop Health Now
+                {t("check_crop_health_now")}
               </Button>
             </Link>
 
@@ -59,7 +61,7 @@ export default function LandingPage() {
                 variant="outline"
                 className="w-full sm:w-auto border-emerald-300/40 text-emerald-300 hover:bg-emerald-400/10 hover:text-emerald-200 font-semibold px-8 py-6 rounded-2xl text-base backdrop-blur"
               >
-                Explore Government Surveillance
+                {t("government_surveillance")}
               </Button>
             </Link>
           </div>
@@ -70,36 +72,35 @@ export default function LandingPage() {
               href="/farmer"
               className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition text-emerald-200 flex items-center justify-center gap-2"
             >
-              <span>🌱 Farmer Demo</span>
+              <span>🌱 {t("farmer_demo")}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
               href="/expert"
               className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition text-emerald-200 flex items-center justify-center gap-2"
             >
-              <span>🔬 Agronomist Demo</span>
+              <span>🔬 {t("agronomist_demo")}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
               href="/official"
               className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition text-emerald-200 flex items-center justify-center gap-2"
             >
-              <span>📊 Official Demo</span>
+              <span>📊 {t("official_demo")}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Intelligence Pipeline Section (Section 49) */}
+      {/* Intelligence Pipeline Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900">
-            End-to-End Intelligence Pipeline
+            {t("end_to_end_pipeline")}
           </h2>
           <p className="text-gray-600 text-sm sm:text-base mt-2">
-            Transforming crop images, microclimate weather, and pest data into
-            field-level actionable advice.
+            {t("pipeline_subtitle")}
           </p>
         </div>
 
@@ -109,7 +110,7 @@ export default function LandingPage() {
               <Scan className="w-6 h-6" />
             </div>
             <h4 className="font-bold text-gray-900 text-sm">
-              1. Image Diagnostic
+              {t("image_diagnostic")}
             </h4>
             <p className="text-xs text-gray-500">
               Mobile photo scan with MobileNet ML detection
@@ -121,10 +122,10 @@ export default function LandingPage() {
               <CloudSun className="w-6 h-6" />
             </div>
             <h4 className="font-bold text-gray-900 text-sm">
-              2. Weather Fusion
+              {t("weather_fusion")}
             </h4>
             <p className="text-xs text-gray-500">
-              Humidity, temp & microclimate risk modeling
+              Humidity, temp &amp; microclimate risk modeling
             </p>
           </div>
 
@@ -132,9 +133,9 @@ export default function LandingPage() {
             <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-800 flex items-center justify-center mx-auto">
               <Activity className="w-6 h-6" />
             </div>
-            <h4 className="font-bold text-gray-900 text-sm">3. Risk Engine</h4>
+            <h4 className="font-bold text-gray-900 text-sm">{t("risk_engine")}</h4>
             <p className="text-xs text-gray-500">
-              Composite score based on crop stage & pest trap
+              Composite score based on crop stage &amp; pest trap
             </p>
           </div>
 
@@ -143,10 +144,10 @@ export default function LandingPage() {
               <Sprout className="w-6 h-6" />
             </div>
             <h4 className="font-bold text-gray-900 text-sm">
-              4. IPDM Advisory
+              {t("ipdm_advisory")}
             </h4>
             <p className="text-xs text-gray-500">
-              Cultural & biological controls + safe input guidance
+              Cultural &amp; biological controls + safe input guidance
             </p>
           </div>
 
@@ -155,10 +156,10 @@ export default function LandingPage() {
               <UserCheck className="w-6 h-6" />
             </div>
             <h4 className="font-bold text-gray-900 text-sm">
-              5. Expert Verification
+              {t("expert_verification")}
             </h4>
             <p className="text-xs text-gray-500">
-              Agronomist validation & feedback learning loop
+              Agronomist validation &amp; feedback learning loop
             </p>
           </div>
         </div>
@@ -169,7 +170,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Platform Core Capabilities
+              {t("platform_capabilities")}
             </h2>
           </div>
 
@@ -177,7 +178,7 @@ export default function LandingPage() {
             <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
               <Globe className="w-8 h-8 text-emerald-600" />
               <h3 className="font-bold text-lg text-gray-900">
-                Multilingual Farmer Interface
+                {t("multilingual_farmer_interface")}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
                 Full native UI support for English, Hindi, and Marathi with
@@ -189,7 +190,7 @@ export default function LandingPage() {
             <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
               <MapPin className="w-8 h-8 text-emerald-600" />
               <h3 className="font-bold text-lg text-gray-900">
-                PostGIS Hotspot Mapping
+                {t("postgis_hotspot_mapping")}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
                 Geospatial surveillance for district and block officials to
@@ -201,7 +202,7 @@ export default function LandingPage() {
             <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
               <ShieldCheck className="w-8 h-8 text-emerald-600" />
               <h3 className="font-bold text-lg text-gray-900">
-                Responsible AI Disclosures
+                {t("responsible_ai_disclosures")}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
                 Every AI assessment transparently highlights confidence scores
@@ -215,10 +216,8 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="mt-auto bg-emerald-950 text-emerald-200 text-xs py-8 px-4 border-t border-emerald-900 text-center">
-        <p className="font-semibold text-white">CropGuard Platform MVP</p>
-        <p className="mt-1 text-emerald-400">
-          Detect early. Act wisely. Protect every crop.
-        </p>
+        <p className="font-semibold text-white">{t("cropguard_platform_mvp")}</p>
+        <p className="mt-1 text-emerald-400">{t("app_tagline")}</p>
       </footer>
     </div>
   );

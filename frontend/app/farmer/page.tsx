@@ -16,7 +16,7 @@ import {
   Sprout, 
   AlertTriangle, 
   ShieldCheck, 
-  Clock, 
+  Bell,
   Activity
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ export default function FarmerDashboard() {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   const [liveWeather, setLiveWeather] = useState<WeatherData | null>(null);
+  const [alerts, setAlerts] = useState(DEMO_ALERTS);
 
   useEffect(() => {
     async function loadOpenMeteoWeather() {
@@ -164,31 +165,54 @@ export default function FarmerDashboard() {
 
           </div>
 
-          {/* Activity Timeline (Section 17) */}
+          {/* Inline Alerts Panel */}
           <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
-            <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-emerald-700" />
-              {t("recent_field_activity_timeline")}
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <Bell className="w-4 h-4 text-amber-500" />
+                {t("alerts_notification_center")}
+                {alerts.filter(a => !a.read).length > 0 && (
+                  <span className="ml-1 text-xs bg-red-500 text-white rounded-full px-2 py-0.5 font-bold">
+                    {alerts.filter(a => !a.read).length}
+                  </span>
+                )}
+              </h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setAlerts(alerts.map(a => ({ ...a, read: true })))}
+                className="text-xs font-semibold rounded-xl border-gray-300"
+              >
+                {t("mark_all_read")}
+              </Button>
+            </div>
 
-            <div className="space-y-4 text-xs sm:text-sm pl-4 border-l-2 border-emerald-200">
-              <div className="relative pl-4">
-                <span className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-600 ring-4 ring-white" />
-                <span className="text-xs text-gray-400 font-semibold block">{t("today")}</span>
-                <p className="font-semibold text-gray-800">{t("recent_case")}</p>
-              </div>
-
-              <div className="relative pl-4">
-                <span className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-white" />
-                <span className="text-xs text-gray-400 font-semibold block">{t("yesterday")}</span>
-                <p className="font-semibold text-gray-800">{t("trap_observation")}</p>
-              </div>
-
-              <div className="relative pl-4">
-                <span className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-white" />
-                <span className="text-xs text-gray-400 font-semibold block">3 {t("days_ago")}</span>
-                <p className="font-semibold text-gray-800">{t("weather_alert")}</p>
-              </div>
+            <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+              {alerts.slice(0, 5).map((alert) => (
+                <div
+                  key={alert.id}
+                  onClick={() => setAlerts(alerts.map(a => a.id === alert.id ? { ...a, read: true } : a))}
+                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
+                    alert.read
+                      ? "bg-gray-50 border-gray-200"
+                      : "bg-amber-50/60 border-amber-300 shadow-sm"
+                  }`}
+                >
+                  <div className="p-2 rounded-lg bg-amber-100 text-amber-700 shrink-0">
+                    <AlertTriangle className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="font-semibold text-xs text-gray-900 truncate">{alert.title}</h4>
+                      {!alert.read && (
+                        <span className="shrink-0 w-2 h-2 rounded-full bg-red-500" />
+                      )}
+                    </div>
+                    <p className="text-[11px] text-gray-500 leading-relaxed mt-0.5 line-clamp-2">{alert.message}</p>
+                    <span className="text-[10px] text-gray-400 mt-1 block">{alert.created_at}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
