@@ -21,6 +21,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "@/lib/i18n";
 
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
+
 export default function ExpertPortal() {
   const { t } = useTranslation();
   const [selectedCase, setSelectedCase] = useState("1042");
@@ -33,7 +35,7 @@ export default function ExpertPortal() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="Agronomist: Dr. V. Sharma" />
 
       <div className="flex-1 flex">
@@ -213,6 +215,8 @@ export default function ExpertPortal() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="EXPERT" />
     </div>
   );
 }

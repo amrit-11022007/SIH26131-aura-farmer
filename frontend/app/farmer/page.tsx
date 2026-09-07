@@ -1,34 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/agri/Navbar";
 import { Sidebar } from "@/components/agri/Sidebar";
 import { WeatherCard } from "@/components/agri/WeatherCard";
 import { RiskBadge } from "@/components/agri/RiskBadge";
-import { DEMO_FIELDS, DEMO_WEATHER, DEMO_ALERTS } from "@/lib/demo-data";
+import { DEMO_FIELDS, DEMO_ALERTS } from "@/lib/demo-data";
+import { fetchLiveWeather } from "@/lib/weather";
+import { WeatherData } from "@/types";
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
 import { 
   Scan, 
   Bug, 
   Sprout, 
   AlertTriangle, 
   ShieldCheck, 
-  ChevronRight, 
   Clock, 
-  Activity,
-  Plus
+  Activity
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
 
 export default function FarmerDashboard() {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
+  const [liveWeather, setLiveWeather] = useState<WeatherData | null>(null);
+
+  useEffect(() => {
+    async function loadOpenMeteoWeather() {
+      const data = await fetchLiveWeather();
+      setLiveWeather(data);
+    }
+    loadOpenMeteoWeather();
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
-      <Navbar currentRole="Farmer: Rajesh Kumar" onToggleSidebar={() => setCollapsed(!collapsed)} />
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
+      <Navbar currentRole="Farmer: Ramesh Patel" onToggleSidebar={() => setCollapsed(!collapsed)} />
 
       <div className="flex-1 flex">
         <Sidebar role="FARMER" isCollapsed={collapsed} onToggleCollapse={() => setCollapsed(!collapsed)} />
@@ -39,24 +49,26 @@ export default function FarmerDashboard() {
           <div className="bg-gradient-to-r from-[#166534] via-emerald-800 to-emerald-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <h1 className="text-2xl sm:text-3xl font-extrabold flex items-center gap-2">
-                {t("good_evening_label")}, Rajesh 👋
+                {t("good_evening_label")}, Ramesh 👋
               </h1>
               <p className="text-emerald-100 text-sm mt-1">
                 {t("farm_health_summary")}: <span className="font-bold text-white">{t("field_healthy_single")}</span> • <span className="font-bold text-amber-300">{t("field_needs_single")}</span>
               </p>
             </div>
 
-            {/* Primary & Secondary CTAs (Section 17 & Section 27 Mobile Navigation) */}
-            <div className="flex items-center gap-3 shrink-0">
+            {/* Primary & Secondary CTAs with Fixed Premium Color UI */}
+            <div className="flex items-center gap-3 shrink-0 flex-wrap sm:flex-nowrap">
               <Link href="/farmer/diagnose">
-                <Button className="bg-[#22C55E] hover:bg-emerald-500 text-gray-950 font-bold px-6 py-6 rounded-2xl text-sm shadow-md flex items-center gap-2 transition-all">
-                  <Scan className="w-5 h-5" />
+                <Button className="bg-[#22C55E] hover:bg-emerald-400 text-gray-950 font-extrabold px-6 py-6 rounded-2xl text-sm shadow-lg flex items-center gap-2 transition-all transform hover:scale-[1.02]">
+                  <Scan className="w-5 h-5 text-gray-950" />
                   {t("check_crop_health")}
                 </Button>
               </Link>
+
+              {/* Fixed Color UI: High contrast amber-gold button with dark text & crisp borders */}
               <Link href="/farmer/pests">
-                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold px-5 py-6 rounded-2xl text-sm backdrop-blur">
-                  <Bug className="w-4 h-4 mr-1.5" />
+                <Button className="bg-amber-400 hover:bg-amber-300 text-gray-950 font-extrabold px-6 py-6 rounded-2xl text-sm shadow-lg flex items-center gap-2 transition-all border-2 border-amber-300 transform hover:scale-[1.02]">
+                  <Bug className="w-5 h-5 text-gray-950" />
                   {t("report_pest")}
                 </Button>
               </Link>
@@ -102,7 +114,9 @@ export default function FarmerDashboard() {
               </div>
               <div>
                 <span className="text-xs text-gray-500 font-medium block">🌦 {t("weather_risk_warning")}</span>
-                <span className="text-sm font-bold text-orange-600">Moderate/High</span>
+                <span className="text-sm font-bold text-orange-600">
+                  {liveWeather?.disease_conducive ? "High Risk" : "Moderate Risk"}
+                </span>
               </div>
             </Card>
 
@@ -111,9 +125,9 @@ export default function FarmerDashboard() {
           {/* Microclimate Weather & My Fields */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            {/* Weather Module */}
+            {/* Open-Meteo Powered Live Weather Module */}
             <div className="lg:col-span-1">
-              <WeatherCard weather={DEMO_WEATHER} />
+              <WeatherCard weather={liveWeather || undefined} />
             </div>
 
             {/* My Fields List */}
@@ -180,6 +194,8 @@ export default function FarmerDashboard() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="FARMER" />
     </div>
   );
 }

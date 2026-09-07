@@ -11,11 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
 
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
+
 export default function FieldsPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="Farmer: Rajesh Kumar" />
 
       <div className="flex-1 flex">
@@ -94,6 +96,8 @@ export default function FieldsPage() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="FARMER" />
     </div>
   );
 }
