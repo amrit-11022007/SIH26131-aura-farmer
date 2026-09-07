@@ -35,6 +35,7 @@ import {
   AreaChart,
   Area
 } from "recharts";
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
 
 const diseaseTrendData = [
   { date: "Mon", "Early Blight": 12, "Bacterial Blight": 8, "Stripe Rust": 4 },
@@ -73,7 +74,7 @@ export default function OfficialDashboard() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="Official: Agriculture Director" onToggleSidebar={() => setCollapsed(!collapsed)} />
 
       <div className="flex-1 flex">
@@ -220,6 +221,8 @@ export default function OfficialDashboard() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="AGRICULTURE_OFFICIAL" />
     </div>
   );
 }

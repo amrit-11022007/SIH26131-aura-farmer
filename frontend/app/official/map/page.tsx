@@ -5,10 +5,11 @@ import { Navbar } from "@/components/agri/Navbar";
 import { Sidebar } from "@/components/agri/Sidebar";
 import { SurveillanceMap } from "@/components/agri/SurveillanceMap";
 import { DEMO_HOTSPOTS } from "@/lib/demo-data";
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
 
 export default function OfficialMapPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="Official: Agriculture Director" />
 
       <div className="flex-1 flex">
@@ -23,6 +24,8 @@ export default function OfficialMapPage() {
           <SurveillanceMap hotspots={DEMO_HOTSPOTS} />
         </main>
       </div>
+
+      <MobileBottomNav role="AGRICULTURE_OFFICIAL" />
     </div>
   );
 }

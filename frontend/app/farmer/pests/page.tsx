@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
 
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
+
 export default function PestsPage() {
   const { t } = useTranslation();
   const [pestType, setPestType] = useState("Aphids");
@@ -25,7 +27,7 @@ export default function PestsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="Farmer: Rajesh Kumar" />
 
       <div className="flex-1 flex">
@@ -125,6 +127,8 @@ export default function PestsPage() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="FARMER" />
     </div>
   );
 }

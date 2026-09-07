@@ -8,6 +8,7 @@ import { Bell, AlertTriangle, ShieldAlert, Info, CheckCircle2 } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
 
 export default function AlertsPage() {
   const [alerts, setAlerts] = useState(DEMO_ALERTS);
@@ -18,7 +19,7 @@ export default function AlertsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
       <Navbar currentRole="User Notifications" />
 
       <div className="flex-1 flex">
@@ -64,6 +65,7 @@ export default function AlertsPage() {
 
         </main>
       </div>
+      <MobileBottomNav role="FARMER" />
     </div>
   );
 }

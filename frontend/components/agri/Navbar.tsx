@@ -3,18 +3,22 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import { useTranslation, Language } from "@/lib/i18n";
-import { Shield, Globe, User, Bell, Leaf, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Shield, Globe, User, Bell, Menu, LogOut, LogIn } from "lucide-react";
 
 interface NavbarProps {
   currentRole?: string;
   onToggleSidebar?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ currentRole = "Farmer", onToggleSidebar }) => {
-  const { lang, setLang, t } = useTranslation();
+export const Navbar: React.FC<NavbarProps> = ({ currentRole, onToggleSidebar }) => {
+  const { lang, setLang } = useTranslation();
   const pathname = usePathname();
+  const { data: session } = useSession();
+
+  const userRole = (session?.user as any)?.role || currentRole || "Farmer";
+  const userName = session?.user?.name || userRole;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-emerald-900/10 bg-[#166534] text-white shadow-md">
@@ -44,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRole = "Farmer", onToggle
           </Link>
         </div>
 
-        {/* Quick Role switch links for demo evaluation */}
+        {/* Quick Role switch links for portal navigation */}
         <div className="hidden lg:flex items-center gap-1 bg-emerald-800/60 p-1 rounded-xl border border-emerald-700/50 text-xs">
           <Link
             href="/farmer"
@@ -96,16 +100,38 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRole = "Farmer", onToggle
             <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
           </Link>
 
-          {/* User badge */}
-          <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-emerald-700/60">
-            <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-200 font-semibold text-sm">
-              <User className="w-4 h-4" />
+          {/* User auth state badge */}
+          {session ? (
+            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-emerald-700/60">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-200 font-semibold text-sm">
+                {session.user?.image ? (
+                  <img src={session.user.image} alt="Avatar" className="w-8 h-8 rounded-full" />
+                ) : (
+                  <User className="w-4 h-4" />
+                )}
+              </div>
+              <div className="text-left text-xs leading-tight">
+                <p className="font-medium text-white max-w-[100px] truncate">{userName}</p>
+                <p className="text-emerald-300 text-[10px] uppercase font-bold">{userRole}</p>
+              </div>
+              <button
+                onClick={() => signOut({ callbackUrl: "/login" })}
+                title="Sign Out"
+                className="ml-1 p-1 text-emerald-200 hover:text-white hover:bg-emerald-700/60 rounded-lg transition"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
-            <div className="text-left text-xs leading-tight">
-              <p className="font-medium text-white">{currentRole}</p>
-              <p className="text-emerald-300 text-[10px]">Logged in</p>
-            </div>
-          </div>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs px-3 py-1.5 rounded-lg border border-emerald-600 transition"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Sign In</span>
+            </Link>
+          )}
+
         </div>
 
       </div>

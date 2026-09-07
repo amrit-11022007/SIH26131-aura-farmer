@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/agri/Navbar";
 import { Sidebar } from "@/components/agri/Sidebar";
 import { AnimatedAnalysisState } from "@/components/agri/AnimatedAnalysisState";
 import { DiagnosisResult } from "@/components/agri/DiagnosisResult";
 import { DEMO_DIAGNOSIS_RESULT } from "@/lib/demo-data";
 import { api } from "@/lib/api";
+import { uploadImageToCloudinary } from "@/lib/cloudinary";
+import { saveDiagnosis } from "@/lib/supabase";
+import { MobileBottomNav } from "@/components/agri/MobileBottomNav";
 import { 
   Camera, 
   Upload, 
@@ -15,11 +18,14 @@ import {
   AlertCircle, 
   ArrowRight, 
   RefreshCw,
-  Image as ImageIcon
+  Image as ImageIcon,
+  SwitchCamera,
+  RotateCcw,
+  CheckCircle2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/lib/i18n";
 
 export default function DiagnosisPage() {
@@ -29,9 +35,92 @@ export default function DiagnosisPage() {
   const [variety, setVariety] = useState("Abhinav Hybrid");
   const [growthStage, setGrowthStage] = useState("Flowering & Fruiting");
   const [soilType, setSoilType] = useState("Black Clay Loam");
+  
+  // Image and Camera state
+  const [inputMode, setInputMode] = useState<"file" | "camera">("file");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isCameraActive, setIsCameraActive] = useState(false);
+  const [facingMode, setFacingMode] = useState<"environment" | "user">("environment");
+  const [cameraError, setCameraError] = useState<string | null>(null);
   const [analysisResult, setAnalysisResult] = useState<any>(null);
+
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  // Start Camera Stream
+  const startCamera = async () => {
+    setCameraError(null);
+    try {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+      }
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: facingMode },
+      });
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setIsCameraActive(true);
+    } catch (err) {
+      console.error("Camera access error:", err);
+      setCameraError("Camera permission denied or camera unavailable. Please upload an image file instead.");
+      setIsCameraActive(false);
+    }
+  };
+
+  // Stop Camera Stream
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+    }
+    setIsCameraActive(false);
+  };
+
+  // Toggle Camera Facing Mode (Front / Rear)
+  const toggleFacingMode = () => {
+    const nextMode = facingMode === "environment" ? "user" : "environment";
+    setFacingMode(nextMode);
+  };
+
+  // Re-initialize camera when facingMode or inputMode changes
+  useEffect(() => {
+    if (inputMode === "camera" && !imagePreview) {
+      startCamera();
+    } else {
+      stopCamera();
+    }
+    return () => stopCamera();
+  }, [inputMode, facingMode]);
+
+  // Capture photo snapshot from live video stream
+  const captureSnapshot = () => {
+    if (!videoRef.current) return;
+
+    const video = videoRef.current;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+      setImagePreview(dataUrl);
+
+      // Convert canvas snapshot to File object
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const file = new File([blob], `crop_scan_${Date.now()}.jpg`, { type: "image/jpeg" });
+          setImageFile(file);
+        }
+      }, "image/jpeg", 0.95);
+
+      stopCamera();
+    }
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -41,22 +130,45 @@ export default function DiagnosisPage() {
     }
   };
 
+  const handleRetake = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    if (inputMode === "camera") {
+      startCamera();
+    }
+  };
+
   const handleStartAnalysis = async () => {
+    stopCamera();
     setStep(4); // Move to Animated Analysis step
     
-    // Simulate/run analysis API call
+    let imageUrl = imagePreview || "/uploads/sample_leaf.jpg";
+    if (imageFile) {
+      try {
+        const cloudUrl = await uploadImageToCloudinary(imageFile);
+        if (cloudUrl) imageUrl = cloudUrl;
+      } catch (err) {
+        console.warn("Cloudinary upload fallback:", err);
+      }
+    }
+
     const formData = new FormData();
     formData.append("field_id", "field-1");
     formData.append("crop", crop);
+    formData.append("image_url", imageUrl);
     if (imageFile) formData.append("file", imageFile);
 
     const res = await api.submitDiagnosis(formData);
-    setAnalysisResult(res);
+    const finalResult = res ? { ...res, image_url: imageUrl } : { ...DEMO_DIAGNOSIS_RESULT, image_url: imageUrl };
+
+    // Save diagnosis with Cloudinary URL to Supabase/PostgreSQL
+    await saveDiagnosis(finalResult);
+    setAnalysisResult(finalResult);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7FAF7]">
-      <Navbar currentRole="Farmer: Rajesh Kumar" />
+    <div className="min-h-screen flex flex-col bg-[#F7FAF7] pb-20 md:pb-0">
+      <Navbar currentRole="Farmer: Ramesh Patel" />
 
       <div className="flex-1 flex">
         <Sidebar role="FARMER" />
@@ -73,7 +185,7 @@ export default function DiagnosisPage() {
             </p>
           </div>
 
-          {/* 5-Step Wizard Indicator (Section 29) */}
+          {/* 5-Step Wizard Indicator */}
           <div className="flex items-center justify-between max-w-2xl mx-auto px-4 py-3 bg-white rounded-2xl border border-gray-200 shadow-sm text-xs font-semibold">
             <div className={`flex items-center gap-1.5 ${step >= 1 ? "text-[#166534]" : "text-gray-400"}`}>
               <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] ${step >= 1 ? "bg-[#166534] text-white" : "bg-gray-200"}`}>1</span>
@@ -105,7 +217,7 @@ export default function DiagnosisPage() {
             </div>
           </div>
 
-          {/* STEP 1 & 2 & 3 FORM */}
+          {/* STEP 1, 2, 3 FORM */}
           {step <= 3 && (
             <Card className="max-w-2xl mx-auto border-emerald-200 shadow-md bg-white p-6 space-y-6">
               
@@ -128,33 +240,72 @@ export default function DiagnosisPage() {
                 </div>
               </div>
 
-              {/* Image Upload Area (Camera/Scanner UI) */}
+              {/* Input Method Selector (Upload File vs Live Camera Scan) */}
               <div className="space-y-4 pt-4 border-t border-gray-100">
-                <h3 className="text-base font-bold text-gray-900">{t("upload_crop_symptom_photo")}</h3>
-                
-                <div className="relative border-2 border-dashed border-emerald-300/80 rounded-2xl p-6 text-center bg-emerald-50/40 hover:bg-emerald-50 transition cursor-pointer">
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={handleImageChange}
-                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" 
-                  />
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-bold text-gray-900">{t("upload_crop_symptom_photo")}</h3>
+                  
+                  <div className="flex items-center bg-gray-100 p-1 rounded-xl text-xs font-semibold">
+                    <button
+                      type="button"
+                      onClick={() => { setInputMode("file"); stopCamera(); }}
+                      className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+                        inputMode === "file" ? "bg-[#166534] text-white shadow" : "text-gray-600 hover:text-gray-900"
+                      }`}
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      Gallery / File
+                    </button>
 
-                  {imagePreview ? (
-                    <div className="space-y-3">
-                      <div className="relative w-40 h-40 mx-auto rounded-xl overflow-hidden border border-emerald-400 shadow-md">
-                        <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
-                      </div>
-                      <p className="text-xs text-emerald-800 font-semibold flex items-center justify-center gap-1">
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        {t("image_loaded")} ({imageFile?.name || "Sample Photo"})
-                      </p>
-                      <span className="text-[11px] text-gray-500 underline">{t("click_replace")}</span>
+                    <button
+                      type="button"
+                      onClick={() => { setInputMode("camera"); startCamera(); }}
+                      className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 ${
+                        inputMode === "camera" ? "bg-[#166534] text-white shadow" : "text-gray-600 hover:text-gray-900"
+                      }`}
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                      Live Camera
+                    </button>
+                  </div>
+                </div>
+
+                {/* Display Captured Preview if image exists */}
+                {imagePreview ? (
+                  <div className="p-6 border-2 border-emerald-300 rounded-2xl bg-emerald-50/40 text-center space-y-4">
+                    <div className="relative w-48 h-48 mx-auto rounded-xl overflow-hidden border-2 border-emerald-500 shadow-md">
+                      <img src={imagePreview} alt="Captured Crop" className="w-full h-full object-cover" />
                     </div>
-                  ) : (
+                    <div className="space-y-1">
+                      <p className="text-xs text-emerald-900 font-bold flex items-center justify-center gap-1">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                        Photo Captured Successfully!
+                      </p>
+                      <p className="text-[11px] text-gray-500">Ready for AI disease classification</p>
+                    </div>
+                    <Button
+                      type="button"
+                      onClick={handleRetake}
+                      variant="outline"
+                      className="border-emerald-300 text-emerald-800 text-xs font-semibold rounded-xl gap-1.5"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      Retake Photo
+                    </Button>
+                  </div>
+                ) : inputMode === "file" ? (
+                  /* File Upload Dropzone */
+                  <div className="relative border-2 border-dashed border-emerald-300/80 rounded-2xl p-6 text-center bg-emerald-50/40 hover:bg-emerald-50 transition cursor-pointer">
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleImageChange}
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" 
+                    />
+
                     <div className="space-y-3">
                       <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-[#166534] flex items-center justify-center mx-auto shadow-sm">
-                        <Camera className="w-7 h-7" />
+                        <Upload className="w-7 h-7" />
                       </div>
                       <div>
                         <p className="text-sm font-bold text-gray-800">{t("take_photo_or_drag")}</p>
@@ -164,8 +315,62 @@ export default function DiagnosisPage() {
                         {t("choose_file")}
                       </span>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  /* Live Camera Interface */
+                  <div className="relative bg-black rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-500">
+                    {cameraError ? (
+                      <div className="p-8 text-center text-white space-y-3">
+                        <AlertCircle className="w-8 h-8 text-yellow-400 mx-auto" />
+                        <p className="text-xs text-gray-200">{cameraError}</p>
+                        <Button
+                          type="button"
+                          onClick={() => setInputMode("file")}
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-xl"
+                        >
+                          Switch to File Upload
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="relative flex flex-col items-center justify-center min-h-[320px]">
+                        <video
+                          ref={videoRef}
+                          autoPlay
+                          playsInline
+                          muted
+                          className="w-full h-[340px] object-cover"
+                        />
+
+                        {/* Scanner Overlay Box */}
+                        <div className="absolute inset-0 border-2 border-dashed border-emerald-400/70 m-8 rounded-2xl pointer-events-none flex items-center justify-center">
+                          <span className="bg-black/60 text-emerald-300 text-[11px] px-3 py-1 rounded-full border border-emerald-500/40 backdrop-blur">
+                            Align leaf or crop symptom in frame
+                          </span>
+                        </div>
+
+                        {/* Camera Action Toolbar */}
+                        <div className="absolute bottom-4 inset-x-0 flex items-center justify-center gap-4 px-4">
+                          <button
+                            type="button"
+                            onClick={toggleFacingMode}
+                            title="Switch Front/Rear Camera"
+                            className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur flex items-center justify-center transition"
+                          >
+                            <SwitchCamera className="w-5 h-5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={captureSnapshot}
+                            className="w-14 h-14 rounded-full bg-white text-[#166534] border-4 border-emerald-400 shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition"
+                          >
+                            <Camera className="w-7 h-7" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Field Growth Context */}
@@ -237,6 +442,8 @@ export default function DiagnosisPage() {
 
         </main>
       </div>
+
+      <MobileBottomNav role="FARMER" />
     </div>
   );
 }

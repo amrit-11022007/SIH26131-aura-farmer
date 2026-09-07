@@ -113,6 +113,20 @@ export const DEMO_DIAGNOSIS_RESULT: DiagnosisResult = {
   disclaimer: "AI-assisted preliminary assessment. Expert verification recommended for low confidence cases."
 };
 
+export const DEMO_DIAGNOSES: DiagnosisResult[] = [DEMO_DIAGNOSIS_RESULT];
+
+export const DEMO_PEST_REPORTS = [
+  {
+    id: "pest-1",
+    field_id: "field-1",
+    pest_type: "Aphids",
+    count: 18,
+    trap_type: "Yellow Sticky Trap",
+    notes: "High concentration on southern border",
+    created_at: "2026-01-15T00:00:00Z"
+  }
+];
+
 export const DEMO_HOTSPOTS: Hotspot[] = [
   {
     id: "hs-1",
